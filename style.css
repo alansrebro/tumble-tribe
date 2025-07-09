@@ -16,8 +16,10 @@ body {
   text-align: center;
 }
 .logo {
+  display: block;
+  margin: 0 auto 18px auto;
   width: 220px;
-  margin-bottom: 24px;
+  max-width: 90vw;
 }
 h1 {
   margin: 0 0 12px 0;
@@ -128,6 +130,43 @@ iframe {
   transition: box-shadow 0.2s;
 }
 
+.tab-nav {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 0 auto 24px auto;
+  padding-top: 18px;
+}
+.tab-btn {
+  background: #fffbe9;
+  color: #2d3a2e;
+  border: 2px solid #b07d2c;
+  border-radius: 8px 8px 0 0;
+  padding: 10px 28px;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  outline: none;
+}
+.tab-btn.active, .tab-btn:hover {
+  background: #b07d2c;
+  color: #fffbe9;
+  border-bottom: 2px solid #fffbe9;
+}
+.tab-content {
+  display: none;
+}
+.tab-content.active {
+  display: block;
+}
+
+.container, .tab-content {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
 @media (max-width: 700px) {
   .container {
     max-width: 98vw;
@@ -135,6 +174,7 @@ iframe {
   }
   .logo {
     width: 140px;
+    margin-bottom: 12px;
   }
   .schedule-embed-card {
     max-width: 99vw;
@@ -167,5 +207,13 @@ iframe {
   }
   .fancy-hr {
     margin: 18px 0 18px 0;
+  }
+  .tab-btn {
+    font-size: 1em;
+    padding: 8px 10px;
+  }
+  .tab-nav {
+    gap: 4px;
+    padding-top: 8px;
   }
 } 

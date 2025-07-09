@@ -4,6 +4,7 @@ body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
   padding: 0;
+  line-height: 1.7;
 }
 .container {
   max-width: 600px;
@@ -11,27 +12,39 @@ body {
   background: #fffbe9;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-  padding: 32px;
+  padding: 40px 32px 36px 32px;
   text-align: center;
 }
 .logo {
   width: 220px;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 h1 {
-  margin: 0;
+  margin: 0 0 12px 0;
   font-size: 2.5em;
   letter-spacing: 2px;
 }
 h2 {
   margin-top: 0;
+  margin-bottom: 18px;
   font-weight: 400;
   color: #b07d2c;
   font-size: 1.3em;
 }
+h3, .schedule-heading {
+  margin-top: 32px;
+  margin-bottom: 16px;
+}
 ul {
   list-style: none;
   padding: 0;
+  margin: 18px 0 24px 0;
+}
+ul li {
+  margin-bottom: 10px;
+}
+p {
+  margin: 18px 0 18px 0;
 }
 a {
   color: #b07d2c;
@@ -93,13 +106,6 @@ iframe {
   height: 420px;
   background: #fff;
   box-shadow: 0 1px 4px rgba(176, 125, 44, 0.07);
-}
-.schedule-heading {
-  font-size: 1.6em;
-  font-weight: 700;
-  color: #2d3a2e;
-  margin-bottom: 10px;
-  letter-spacing: 1px;
 }
 
 @media (max-width: 700px) {

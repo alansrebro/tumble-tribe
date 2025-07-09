@@ -88,7 +88,16 @@
         for (let row = 0; row < data.getNumberOfRows(); row++) {
           html += '<tr>';
           for (let col = 0; col < data.getNumberOfColumns(); col++) {
-            html += `<td>${data.getFormattedValue(row, col)}</td>`;
+            let cell = data.getFormattedValue(row, col) || '';
+            let raw = data.getValue(row, col) || '';
+            // If the cell is a URL, make it clickable
+            if (typeof cell === 'string' && (cell.startsWith('http://') || cell.startsWith('https://'))) {
+              html += `<td><a href="${cell}" target="_blank" rel="noopener">${cell}</a></td>`;
+            } else if (typeof raw === 'string' && (raw.startsWith('http://') || raw.startsWith('https://'))) {
+              html += `<td><a href="${raw}" target="_blank" rel="noopener">${raw}</a></td>`;
+            } else {
+              html += `<td>${cell}</td>`;
+            }
           }
           html += '</tr>';
         }
@@ -111,7 +120,16 @@
         for (let row = 0; row < data.getNumberOfRows(); row++) {
           html += '<tr>';
           for (let col = 0; col < data.getNumberOfColumns(); col++) {
-            html += `<td>${data.getFormattedValue(row, col)}</td>`;
+            let cell = data.getFormattedValue(row, col) || '';
+            let raw = data.getValue(row, col) || '';
+            // If the cell is a URL, make it clickable
+            if (typeof cell === 'string' && (cell.startsWith('http://') || cell.startsWith('https://'))) {
+              html += `<td><a href="${cell}" target="_blank" rel="noopener">${cell}</a></td>`;
+            } else if (typeof raw === 'string' && (raw.startsWith('http://') || raw.startsWith('https://'))) {
+              html += `<td><a href="${raw}" target="_blank" rel="noopener">${raw}</a></td>`;
+            } else {
+              html += `<td>${cell}</td>`;
+            }
           }
           html += '</tr>';
         }

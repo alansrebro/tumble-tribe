@@ -24,9 +24,37 @@
 
     <h3 class="schedule-heading">Weekly Schedule</h3>
     <div class="schedule-embed-card">
-      <iframe class="schedule-iframe" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT4_Tae8seMf57WRacQM3WzbdQ1fhKUt3j45nOfYlC6b7jqV-JbZovBYcuw8PP5mDmydFFaxpavcEE3/pubhtml?gid=0&single=true" width="100%" height="400" frameborder="0" scrolling="no"></iframe>
+      <div id="custom-schedule-table">Loading schedule...</div>
     </div>
-    <p style="font-size:0.9em;color:#888;">(Schedule updates automatically from <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vT4_Tae8seMf57WRacQM3WzbdQ1fhKUt3j45nOfYlC6b7jqV-JbZovBYcuw8PP5mDmydFFaxpavcEE3/pubhtml?gid=0&single=true" target="_blank">Google Sheets</a>.)</p>
+    <script>
+      // Fetch schedule data from Google Sheets using the gviz/tq endpoint
+      fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vT4_Tae8seMf57WRacQM3WzbdQ1fhKUt3j45nOfYlC6b7jqV-JbZovBYcuw8PP5mDmydFFaxpavcEE3/gviz/tq?tqx=out:json&gid=0')
+        .then(response => response.text())
+        .then(text => {
+          // Remove the function wrapper to get the JSON
+          const json = JSON.parse(text.substring(47, text.length - 2));
+          const table = json.table;
+          let html = '<table class="custom-schedule"><thead><tr>';
+          // Table headers
+          table.cols.forEach(col => {
+            if (col.label) html += `<th>${col.label}</th>`;
+          });
+          html += '</tr></thead><tbody>';
+          // Table rows
+          table.rows.forEach(row => {
+            html += '<tr>';
+            row.c.forEach(cell => {
+              html += `<td>${cell && cell.v ? cell.v : ''}</td>`;
+            });
+            html += '</tr>';
+          });
+          html += '</tbody></table>';
+          document.getElementById('custom-schedule-table').innerHTML = html;
+        })
+        .catch(() => {
+          document.getElementById('custom-schedule-table').innerText = 'Could not load schedule.';
+        });
+    </script>
   </div>
 </body>
 </html> 

@@ -26,34 +26,35 @@
     <div class="schedule-embed-card">
       <div id="custom-schedule-table">Loading schedule...</div>
     </div>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
-      // Fetch schedule data from Google Sheets using the gviz/tq endpoint
-      fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vT4_Tae8seMf57WRacQM3WzbdQ1fhKUt3j45nOfYlC6b7jqV-JbZovBYcuw8PP5mDmydFFaxpavcEE3/gviz/tq?tqx=out:json&gid=0')
-        .then(response => response.text())
-        .then(text => {
-          // Remove the function wrapper to get the JSON
-          const json = JSON.parse(text.substring(47, text.length - 2));
-          const table = json.table;
+      google.charts.load('current', {'packages':['table']});
+      google.charts.setOnLoadCallback(drawSchedule);
+
+      function drawSchedule() {
+        var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1kUuojh0EaG4tocUJVlH4fgeP0taUGkAQh-y-zkGAK3M/gviz/tq?gid=0');
+        query.send(function(response) {
+          if (response.isError()) {
+            document.getElementById('custom-schedule-table').innerText = 'Could not load schedule.';
+            return;
+          }
+          var data = response.getDataTable();
           let html = '<table class="custom-schedule"><thead><tr>';
-          // Table headers
-          table.cols.forEach(col => {
-            if (col.label) html += `<th>${col.label}</th>`;
-          });
+          for (let col = 0; col < data.getNumberOfColumns(); col++) {
+            html += `<th>${data.getColumnLabel(col)}</th>`;
+          }
           html += '</tr></thead><tbody>';
-          // Table rows
-          table.rows.forEach(row => {
+          for (let row = 0; row < data.getNumberOfRows(); row++) {
             html += '<tr>';
-            row.c.forEach(cell => {
-              html += `<td>${cell && cell.v ? cell.v : ''}</td>`;
-            });
+            for (let col = 0; col < data.getNumberOfColumns(); col++) {
+              html += `<td>${data.getFormattedValue(row, col)}</td>`;
+            }
             html += '</tr>';
-          });
+          }
           html += '</tbody></table>';
           document.getElementById('custom-schedule-table').innerHTML = html;
-        })
-        .catch(() => {
-          document.getElementById('custom-schedule-table').innerText = 'Could not load schedule.';
         });
+      }
     </script>
   </div>
 </body>

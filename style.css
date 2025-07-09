@@ -100,4 +100,34 @@ iframe {
   color: #2d3a2e;
   margin-bottom: 10px;
   letter-spacing: 1px;
+}
+
+@media (max-width: 700px) {
+  .container {
+    max-width: 98vw;
+    padding: 12px;
+  }
+  .logo {
+    width: 140px;
+  }
+  .schedule-embed-card {
+    max-width: 99vw;
+    padding: 10px 2px 8px 2px;
+  }
+  .schedule-iframe {
+    height: 320px;
+  }
+  .custom-schedule th, .custom-schedule td {
+    padding: 8px 2px;
+    font-size: 0.98em;
+  }
+  h1 {
+    font-size: 1.5em;
+  }
+  h2 {
+    font-size: 1em;
+  }
+  .schedule-heading {
+    font-size: 1.1em;
+  }
 } 

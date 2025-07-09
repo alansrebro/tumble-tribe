@@ -95,8 +95,8 @@
         html += '</tbody></table>';
         document.getElementById('custom-schedule-table-tumble').innerHTML = html;
       });
-      // Pedal and Pint Society (Sheet2, gid=123456789)
-      var query2 = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1kUuojh0EaG4tocUJVlH4fgeP0taUGkAQh-y-zkGAK3M/gviz/tq?gid=123456789');
+      // Pedal and Pint Society (Sheet2, gid=309792239)
+      var query2 = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1kUuojh0EaG4tocUJVlH4fgeP0taUGkAQh-y-zkGAK3M/gviz/tq?gid=309792239');
       query2.send(function(response) {
         if (response.isError()) {
           document.getElementById('custom-schedule-table-pedal').innerText = 'Could not load schedule.';
